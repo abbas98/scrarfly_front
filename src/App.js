@@ -1,9 +1,9 @@
 
 import {Routes, Route} from 'react-router-dom'
-import { useState } from 'react';
 
 
-import {useSearchParams} from 'react-router-dom'
+
+
 import Product from './components/product/Product';
 
 function App() {

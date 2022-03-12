@@ -1,6 +1,6 @@
 import { useRef } from "react"
 import { Service } from "../API/DefaultAPI"
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 
 const Login = ({ setLogin }) => {

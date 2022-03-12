@@ -22,7 +22,7 @@ export default function Product() {
             toast.success('data retrieved')
         })
        
-    }, [])
+    })
 
     console.log(product);
 
