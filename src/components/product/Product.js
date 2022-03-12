@@ -15,14 +15,17 @@ export default function Product() {
     const [loginState, setLoginState] = useState(false)
     const [product, setproduct] = useState()
     let params = useParams()
-    console.log(params.productID);
-    useEffect(() => {
-        getData(params.productID).then(e => {
-            setproduct(e)
-            toast.success('data retrieved')
-        })
+ 
+        useEffect(() => {
+            getData(params.productID).then(e => {
+                setproduct(e)
+                toast.success('data retrieved')
+            })
+
+        }, [params])
+        
        
-    })
+    
 
     console.log(product);
 
