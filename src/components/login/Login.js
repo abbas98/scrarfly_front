@@ -63,13 +63,13 @@ const Login = ({ setLogin }) => {
 
     return (
 
-        <div id="loginForm" className=" flex flex-col no-wrap justify-center items-center basis-1/2 w-full p-2  bg-white rounded-2xl">
-            <div className="flex flex-col w-full gap-1">
+        <div id="loginForm" className=" flex flex-col no-wrap justify-center items-center basis-1/2 w-full p-2 gap-2 bg-white rounded-2xl">
+            <div className="flex flex-col w-full">
                 {/* <label className="self-start mb-2 font-[600] text-gray-700 texg-lg" dir="rtl" htmlFor="login_user_name"></label> */}
                 <input placeholder="شماره موبایل" ref={phonenumber} id="login_user_name" type="tel" className="bg-gray-100 h-[50px] rounded-2xl w-full outline-none p-3 text-center mb-1" />
             </div>
 
-            <button type="button" onClick={() => RegisterHandler()} className="mt-6 w-full h-[50px] rounded-2xl bg-sky-800 text-white text-lg">ادامه</button>
+            <button type="button" onClick={() => RegisterHandler()} className=" w-full h-[50px] rounded-2xl bg-sky-800 text-white text-lg">ادامه</button>
         </div>
 
 
