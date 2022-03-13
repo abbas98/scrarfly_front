@@ -6,7 +6,7 @@ import toast from "react-hot-toast"
 
 
 const getData = async (productID) => {
-    const response = await fetch(`http://185.235.41.234/products/${productID}/`)
+    const response = await fetch(`https://185.235.41.234/products/${productID}/`)
     const data = await response.json()
     return data
 }
@@ -18,7 +18,8 @@ export default function Product() {
  
         useEffect(() => {
             getData(params.productID).then(e => {
-                setproduct(e)
+                // setproduct(e)
+                console.log(e);
                 toast.success('data retrieved')
             })
 
@@ -27,7 +28,7 @@ export default function Product() {
        
     
 
-    console.log(product);
+    
 
     return(
         <div className="block  flex-col h-screen bg-gray-200">
