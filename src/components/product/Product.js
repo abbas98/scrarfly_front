@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import toast from "react-hot-toast"
 
-
+x`
 const getData = async (productID) => {
     const response = await fetch(`https://api.scarfly.ir/products/${productID}/`)
     

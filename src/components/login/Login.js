@@ -34,10 +34,10 @@ const Login = ({ setLogin }) => {
                 console.log(newPhoneNumber);
             }
             
-            Service("POST",  newPhoneNumber.toString() ).then(async (res) => {
+            Service("POST",  newPhoneNumber.toString() ).then( (res) => {
                 toast.dismiss(loading)
                 if (res.status === 201) {
-                    const data = await res.json()
+                    const data = res.json()
                     setLogin(true)
                     // toast.dismiss(loading)
                     toast.success('با موفقیت وارد شدید',  {id : loading})
