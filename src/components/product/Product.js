@@ -47,8 +47,8 @@ export default function Product() {
 
     return(
         <div className="block  flex-col bg-gray-200">
-            <div className="flex flex-col w-full h-full p-6 justify-between items-center gap-6">
-                <div id="productDetail" className="  rounded-2xl bg-white p-4 gap-4 flex flex-col ">
+            <div className="flex flex-col w-full h-full p-2 justify-between items-center gap-2">
+                <div id="productDetail" className="  rounded-2xl bg-white p-2 gap-4 flex flex-col ">
                 <img src={product?.image} className="w-full h-fit rounded-2xl" alt={product?.name} />
                 <div className="flex flex-col justify-between gap-4">
                     <p className="font-[600] text-gray-800 texg-lg">{product?.name}</p>
