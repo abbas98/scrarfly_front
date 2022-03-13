@@ -18,7 +18,7 @@ export default function Product() {
  
         useEffect(() => {
             getData(params.productID).then(e => {
-                // setproduct(e)
+                setproduct(e)
                 console.log(e);
                 toast.success('data retrieved')
             })
