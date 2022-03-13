@@ -7,8 +7,8 @@ import toast from "react-hot-toast"
 
 const getData = async (productID) => {
     const response = await fetch(`https://scarfly.ir/products/${productID}/`)
-    const data = await response.json()
-    return data
+    
+    return response
 }
 
 export default function Product() {
@@ -16,11 +16,26 @@ export default function Product() {
     const [product, setproduct] = useState()
     let params = useParams()
  
-        useEffect(() => {
-            getData(params.productID).then(e => {
-                setproduct(e)
-                console.log(e);
-                toast.success('data retrieved')
+        useEffect( () => {
+            getData(params.productID).then(async (e) => {
+                
+                if(e.status === 200){
+                    const data = await e.json()
+                    setproduct(data)
+                   
+                    return
+                }
+                if(e.status === 404){
+                    toast.error('محصول یافت نشد')
+                    return
+                }
+
+                toast.error(
+                    'خطایی رخ داد .\n دوباره سعی کنید.'
+                )
+                
+                
+                
             })
 
         }, [params])
