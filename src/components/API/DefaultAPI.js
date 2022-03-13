@@ -2,19 +2,19 @@ import axios from 'axios'
 
 
 export async function Service(method, input){
-    let data = ''
+    let data;
 
     switch(method){
-        case'post':
-            data = axios.post('https://scarfly.ir/accounts/register/', JSON.stringify(input))
+        case'POST':
+            data = await axios.post('https://api.scarfly.ir/accounts/register/', JSON.stringify({ "phone_number":input.toString()}), { headers: {'content-type': 'application/json'}})
             break
         case'get':
-            data = axios.get('https://scarfly.ir/accounts/register/', JSON.stringify(input))
+            
             break
         default:
             return
     }
-    const response = data.json()
-    return response
+    
+    return data
 }
 

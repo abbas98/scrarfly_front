@@ -8,9 +8,10 @@ const Login = ({ setLogin }) => {
     const phonenumber = useRef()
 
     const RegisterHandler = () => {
-        let phoneNumberRegex = new RegExp('^09[0|1|2|3][0-9]{8}$')
+
+        let phoneNumberRegex = new RegExp('^(\\+98|0)?9\\d{9}$')
         let result = phoneNumberRegex.test(phonenumber.current.value)
-        // console.log(result);
+        
         
         if (!result){
             // setTimeout(() => {
@@ -27,23 +28,30 @@ const Login = ({ setLogin }) => {
         }else{
 
             const loading = toast.loading('')
+            let newPhoneNumber;
+            if (phonenumber.current.value.slice(0,2) === '09'){
+                newPhoneNumber = '+989' + phonenumber.current.value.slice(2, 11)
+                console.log(newPhoneNumber);
+            }
             
-            Service("post", { "phone_number": String(phonenumber.current.innerHTML) }).then(res => {
+            Service("POST",  newPhoneNumber.toString() ).then(async (res) => {
                 toast.dismiss(loading)
                 if (res.status === 201) {
+                    const data = await res.json()
                     setLogin(true)
                     // toast.dismiss(loading)
                     toast.success('با موفقیت وارد شدید',  {id : loading})
-    
-                    localStorage.setItem('access',res.access)
-                    localStorage.setItem('refresh', res.refresh)
-                    localStorage.setItem("access_expiration", res["access_expiration"])
-                    localStorage.setItem("refresh_expiration", res["refresh_expiration"])
+                    console.log(data);
+                    // localStorage.setItem('access',res.access)
+                    // localStorage.setItem('refresh', res.refresh)
+                    // localStorage.setItem("access_expiration", res["access_expiration"])
+                    // localStorage.setItem("refresh_expiration", res["refresh_expiration"])
                 }
         
             }).catch((err) => {
                 // toast.remove(loading)
                 toast.error('خطایی رخ داد دوباره سعی کنید', {id : loading})
+                console.log(err);
                 if (err.status === 401){
                     
                     
