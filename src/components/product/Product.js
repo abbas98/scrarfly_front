@@ -6,7 +6,7 @@ import toast from "react-hot-toast"
 
 
 const getData = async (productID) => {
-    const response = await fetch(`http://api.scarfly.ir/products/${productID}/`)
+    const response = await fetch(`https://api.scarfly.ir/products/${productID}/`)
     
     return response
 }
