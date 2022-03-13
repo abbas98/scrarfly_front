@@ -6,7 +6,7 @@ import toast from "react-hot-toast"
 
 
 const getData = async (productID) => {
-    const response = await fetch(`https://scarfly.ir/products/${productID}/`)
+    const response = await fetch(`http://api.scarfly.ir/products/${productID}/`)
     
     return response
 }
@@ -46,8 +46,8 @@ export default function Product() {
     
 
     return(
-        <div className="block  flex-col bg-gray-200">
-            <div className="flex flex-col w-full h-full p-2 justify-between items-center gap-2">
+        <div className="block  flex-col bg-gray-100">
+            <div className="flex flex-col w-full h-full p-6 justify-between items-center gap-4">
                 <div id="productDetail" className="  rounded-2xl bg-white p-2 gap-4 flex flex-col ">
                 <img src={product?.image} className="w-full h-fit rounded-2xl" alt={product?.name} />
                 <div className="flex flex-col justify-between gap-4">
