@@ -31,21 +31,21 @@ const Login = ({ setLogin }) => {
             let newPhoneNumber;
             if (phonenumber.current.value.slice(0,2) === '09'){
                 newPhoneNumber = '+989' + phonenumber.current.value.slice(2, 11)
-                console.log(newPhoneNumber);
+                
             }
             
             Service("POST",  newPhoneNumber.toString() ).then( (res) => {
                 toast.dismiss(loading)
                 if (res.status === 201) {
-                    const data = res.json()
+                    
                     setLogin(true)
                     // toast.dismiss(loading)
                     toast.success('با موفقیت وارد شدید',  {id : loading})
-                    console.log(data);
-                    // localStorage.setItem('access',res.access)
-                    // localStorage.setItem('refresh', res.refresh)
-                    // localStorage.setItem("access_expiration", res["access_expiration"])
-                    // localStorage.setItem("refresh_expiration", res["refresh_expiration"])
+                    
+                    localStorage.setItem('access',res.data.access)
+                    localStorage.setItem('refresh', res.data.refresh)
+                    localStorage.setItem("access_expiration", res.data["access_expiration"])
+                    localStorage.setItem("refresh_expiration", res.data["refresh_expiration"])
                 }
         
             }).catch((err) => {
