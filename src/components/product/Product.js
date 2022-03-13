@@ -31,7 +31,7 @@ export default function Product() {
     
 
     return(
-        <div className="block  flex-col h-screen bg-gray-200">
+        <div className="block  flex-col bg-gray-200">
             <div className="flex flex-col w-full h-full p-6 justify-between items-center gap-6">
                 <div id="productDetail" className="  rounded-2xl bg-white p-4 gap-4 flex flex-col ">
                 <img src={product?.image} className="w-full h-fit rounded-2xl" alt={product?.name} />
