@@ -48,13 +48,8 @@ const setTokens = (access, refresh) => {
 
 export const verify = async () => {
     Refresh()
-    const response = await axios.get('https://api.scarfly.ir/accounts/verify/', { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access') } }).then(res => {
+     await axios.get('https://api.scarfly.ir/accounts/verify/', { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access') } }).then(res => {
         console.log('logged in');
-    }).catch(err => {
-        const error = JSON.parse(JSON.stringify(err))
-        // if (error.status === 401){
-        //     Refresh()
-        // }
     })
 
 }
