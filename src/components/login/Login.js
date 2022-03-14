@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { Service } from "../API/DefaultAPI"
+import { login, Service } from "../API/DefaultAPI"
 import toast from 'react-hot-toast';
 
 
@@ -11,15 +11,19 @@ const Login = ({ setLogin }) => {
 
         let phoneNumberRegex = new RegExp('^(\\+98|0)?9\\d{9}$')
         let result = phoneNumberRegex.test(phonenumber.current.value)
-        
-        
-        if (!result){
-            // setTimeout(() => {
-            //     toast.loading()
-            // }, 700);
-            // toast.error('شماره وارد شده اشتباه است')
+
+        let newPhoneNumber;
+        if (phonenumber.current.value.slice(0,2) === '09'){
+            newPhoneNumber = '+989' + phonenumber.current.value.slice(2, 11)
             
-                
+        }
+
+
+        
+
+        
+        
+        if (!result){    
                 toast.error('شماره وارد شده اشتباه است',{
                     id: 'clipboard',
                 })
@@ -28,38 +32,36 @@ const Login = ({ setLogin }) => {
         }else{
 
             const loading = toast.loading('')
-            let newPhoneNumber;
-            if (phonenumber.current.value.slice(0,2) === '09'){
-                newPhoneNumber = '+989' + phonenumber.current.value.slice(2, 11)
-                
-            }
-            
-            Service("POST",  newPhoneNumber.toString() ).then( (res) => {
+            login(newPhoneNumber).then(() => {
+                setLogin(true)
                 toast.dismiss(loading)
-                if (res.status === 201) {
-                    
-                    setLogin(true)
-                    // toast.dismiss(loading)
-                    toast.success('با موفقیت وارد شدید',  {id : loading})
-                    
-                    localStorage.setItem('access',res.data.access)
-                    localStorage.setItem('refresh', res.data.refresh)
-                    localStorage.setItem("access_expiration", res.data["access_expiration"])
-                    localStorage.setItem("refresh_expiration", res.data["refresh_expiration"])
-                }
-        
-            }).catch((err) => {
-                // toast.remove(loading)
-                toast.error('خطایی رخ داد دوباره سعی کنید', {id : loading})
-                console.log(err);
-                if (err.status === 401){
-                    
-                    
+                toast.success('با موفقیت وارد شدید')
+            })
 
-                }
+            
+            // Service("POST",  newPhoneNumber.toString() ).then( (res) => {
+            //     toast.dismiss(loading)
+            //     if (res.status === 201) {
+                    
+            //         setLogin(true)
+            //         // toast.dismiss(loading)
+            //         toast.success('با موفقیت وارد شدید',  {id : loading})
+            //         console.log(res.data)
+            //         localStorage.setItem('access',res.data.access)
+            //         localStorage.setItem('refresh', res.data.refresh)
+            //         localStorage.setItem("access_expiration", res.data["access_expiration"])
+            //         localStorage.setItem("refresh_expiration", res.data["refresh_expiration"])
+            //     }
+        
+            // }).catch((err) => {
+            //     // toast.remove(loading)
+            //     toast.error('خطایی رخ داد دوباره سعی کنید', {id : loading})
+            //     console.log(err);
+            //     if (err.status === 401){
+            //     }
                 
     
-            })
+            // })
             // toast.success('با موفقیت وارد شدید')
             
             
@@ -68,6 +70,8 @@ const Login = ({ setLogin }) => {
         
 
     }
+
+
 
     return (
 

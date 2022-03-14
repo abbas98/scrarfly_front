@@ -3,6 +3,7 @@ import CartInfo from "../CartInfo/CartInfo"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import toast from "react-hot-toast"
+import { Refresh, Retrieve } from "../API/DefaultAPI"
 
 
 const getData = async (productID) => {
@@ -15,10 +16,11 @@ export default function Product() {
     const [loginState, setLoginState] = useState(false)
     const [product, setproduct] = useState()
     let params = useParams()
- 
+
+
         useEffect( () => {
             getData(params.productID).then(async (e) => {
-                
+
                 if(e.status === 200){
                     const data = await e.json()
                     setproduct(data)
@@ -29,7 +31,10 @@ export default function Product() {
                     toast.error('محصول یافت نشد')
                     return
                 }
-
+                if(e.status === 400){
+                    toast.error('شماره قبلا وارد شده')
+                    return
+                }
                 toast.error(
                     'خطایی رخ داد .\n دوباره سعی کنید.'
                 )
@@ -37,16 +42,23 @@ export default function Product() {
                 
                 
             })
+            //////////
+
+            Retrieve(2)
+
+            
+            
+         
 
         }, [params])
         
        
-    
+        
 
     
 
     return(
-        <div className="block  flex-col bg-gray-100">
+        <div className="block  flex-col bg-gray-200">
             <div className="flex flex-col w-full h-full p-6 justify-between items-center gap-4">
                 <div id="productDetail" className="  rounded-2xl bg-white p-2 gap-4 flex flex-col ">
                 <img src={product?.image} className="w-full h-fit rounded-2xl" alt={product?.name} />
