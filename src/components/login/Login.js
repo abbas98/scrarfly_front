@@ -18,10 +18,6 @@ const Login = ({ setLogin }) => {
             
         }
         
-
-        
-
-        
         
         if (!result){    
                 toast.error('شماره وارد شده معتبر نیست.',{

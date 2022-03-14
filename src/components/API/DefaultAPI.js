@@ -50,11 +50,9 @@ const setTokens = (access, refresh) => {
 
 
 export const verify = async () => {
-    Refresh()
+    await Refresh()
     if (localStorage.getItem('access')) {
         const response = await axios.get('https://api.scarfly.ir/accounts/verify/', { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access') } })
-            
-        
         return response
     }
 
