@@ -3,7 +3,7 @@ import CartInfo from "../CartInfo/CartInfo"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import toast from "react-hot-toast"
-import {  Retrieve, verify } from "../API/DefaultAPI"
+import {  verify } from "../API/DefaultAPI"
 
 
 const getData = async (productID) => {
@@ -17,7 +17,7 @@ export default function Product() {
     const [product, setproduct] = useState()
     let params = useParams()
 
-    
+
 
         useEffect( () => {
 
@@ -53,7 +53,7 @@ export default function Product() {
             })
             //////////
 
-            Retrieve(2)
+            
 
             
             

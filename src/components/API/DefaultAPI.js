@@ -19,15 +19,18 @@ export async function Retrieve(input) {
 
 
 export async function Refresh() {
-    let response = await axios.post(`https://api.scarfly.ir/accounts/refresh/`,
-        JSON.stringify({ "refresh": localStorage.getItem('refresh') }),
-        { headers: { 'content-type': 'application/json' } })
+    if (localStorage.getItem('refresh')) {
+        let response = await axios.post(`https://api.scarfly.ir/accounts/refresh/`,
+            JSON.stringify({ "refresh": localStorage.getItem('refresh') }),
+            { headers: { 'content-type': 'application/json' } })
 
 
-    console.log('Token Refreshed');
+        console.log('Token Refreshed');
 
-    setTokens(response.data.access)
-    return
+        setTokens(response.data.access)
+        return
+    }
+
 }
 
 export async function login(input) {
@@ -48,9 +51,13 @@ const setTokens = (access, refresh) => {
 
 export const verify = async () => {
     Refresh()
-     await axios.get('https://api.scarfly.ir/accounts/verify/', { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access') } }).then(res => {
-        console.log('logged in');
-    })
+    if (localStorage.getItem('access')) {
+        const response = await axios.get('https://api.scarfly.ir/accounts/verify/', { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access') } })
+            
+        
+        return response
+    }
+
 
 }
 
