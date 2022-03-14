@@ -3,7 +3,7 @@ import CartInfo from "../CartInfo/CartInfo"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import toast from "react-hot-toast"
-import { Refresh, Retrieve } from "../API/DefaultAPI"
+import {  Retrieve } from "../API/DefaultAPI"
 
 
 const getData = async (productID) => {

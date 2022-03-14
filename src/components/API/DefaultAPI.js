@@ -2,32 +2,21 @@
 import axios from 'axios'
 
 export async function Service(method, input) {
-    let data;
-
-    switch (method) {
-        case 'POST':
-            data = await axios.post('https://api.scarfly.ir/accounts/register/', JSON.stringify({ "phone_number": input.toString() }), { headers: { 'content-type': 'application/json' } })
-            break
-        case 'get':
-
-            break
-        default:
-            return
-    }
+    let data = await axios.post('https://api.scarfly.ir/accounts/register/', JSON.stringify({ "phone_number": input.toString() }), { headers: { 'content-type': 'application/json' } })
 
     return data
 }
 
 export async function Retrieve( input) {
     
-    let data = await axios.get(`https://api.scarfly.ir/orders/${input}/`,
+    await axios.get(`https://api.scarfly.ir/orders/${input}/`,
              { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access') } }).then(res => {
              }).catch(err => {
                  Refresh().then(Retrieve( input))
              })
 
              
-             
+            
 
     
         
