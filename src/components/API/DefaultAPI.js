@@ -7,36 +7,34 @@ export async function Service(method, input) {
     return data
 }
 
-export async function Retrieve( input) {
-    
+export async function Retrieve(input) {
+
     await axios.get(`https://api.scarfly.ir/orders/${input}/`,
-             { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access') } }).then(res => {
-             }).catch(err => {
-                 Refresh().then(Retrieve( input))
-             })
+        { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access') } }).then(res => {
+        }).catch(err => {
+            Refresh().then(Retrieve(input))
+        })
 
-             
-            
-
-    
-        
 }
 
 
 export async function Refresh() {
     let response = await axios.post(`https://api.scarfly.ir/accounts/refresh/`,
-     JSON.stringify({ "refresh": localStorage.getItem('refresh') }),
-     { headers: { 'content-type': 'application/json' } })
+        JSON.stringify({ "refresh": localStorage.getItem('refresh') }),
+        { headers: { 'content-type': 'application/json' } })
+
+
+    console.log('Token Refreshed');
 
     setTokens(response.data.access)
     return
 }
 
 export async function login(input) {
-    let response = await axios.post('https://api.scarfly.ir/accounts/login/', JSON.stringify({ "phone_number": input.toString() }), { headers: { 'content-type': 'application/json' }} )
-    console.log('Login',response);
+    let response = await axios.post('https://api.scarfly.ir/accounts/login/', JSON.stringify({ "phone_number": input.toString() }), { headers: { 'content-type': 'application/json' } })
+    console.log('Login', response);
     setTokens(response.data.access, response.data.refresh)
-    if ( response.status === 200){
+    if (response.status === 200) {
         return response
     }
 }
@@ -47,5 +45,18 @@ const setTokens = (access, refresh) => {
     refresh && localStorage.setItem('refresh', refresh)
 }
 
+
+export const verify = async () => {
+    Refresh()
+    const response = await axios.get('https://api.scarfly.ir/accounts/verify/', { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access') } }).then(res => {
+        console.log('logged in');
+    }).catch(err => {
+        const error = JSON.parse(JSON.stringify(err))
+        // if (error.status === 401){
+        //     Refresh()
+        // }
+    })
+
+}
 
 

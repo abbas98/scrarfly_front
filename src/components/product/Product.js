@@ -3,7 +3,7 @@ import CartInfo from "../CartInfo/CartInfo"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import toast from "react-hot-toast"
-import {  Retrieve } from "../API/DefaultAPI"
+import {  Retrieve, verify } from "../API/DefaultAPI"
 
 
 const getData = async (productID) => {
@@ -17,8 +17,17 @@ export default function Product() {
     const [product, setproduct] = useState()
     let params = useParams()
 
+    
 
         useEffect( () => {
+
+            verify().then(res => {
+                if(res.status === 200){
+                    setLoginState(true)
+                }
+                
+            })
+
             getData(params.productID).then(async (e) => {
 
                 if(e.status === 200){

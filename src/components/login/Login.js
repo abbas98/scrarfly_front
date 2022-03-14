@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { login} from "../API/DefaultAPI"
+import { login, verify} from "../API/DefaultAPI"
 import toast from 'react-hot-toast';
 
 
@@ -17,14 +17,14 @@ const Login = ({ setLogin }) => {
             newPhoneNumber = '+989' + phonenumber.current.value.slice(2, 11)
             
         }
-
+        
 
         
 
         
         
         if (!result){    
-                toast.error('شماره وارد شده اشتباه است',{
+                toast.error('شماره وارد شده معتبر نیست.',{
                     id: 'clipboard',
                 })
                 
@@ -36,6 +36,9 @@ const Login = ({ setLogin }) => {
                 setLogin(true)
                 toast.dismiss(loading)
                 toast.success('با موفقیت وارد شدید')
+            }).catch(err => {
+                toast.dismiss(loading)
+                toast.error('شماره ثبت نشده است.')
             })
 
             
