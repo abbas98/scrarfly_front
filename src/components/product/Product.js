@@ -77,7 +77,7 @@ export default function Product() {
                 </div>
                 </div> 
                 
-                {loginState ? <CartInfo /> : <Login setLogin={setLoginState}/>}
+                {loginState ? <CartInfo productID={params.productID} /> : <Login setLogin={setLoginState}/>}
                 
             </div>
         </div>

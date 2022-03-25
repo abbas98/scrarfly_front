@@ -59,4 +59,10 @@ export const verify = async () => {
 
 }
 
+export const createOrder = async (input) => {
+    const response = await axios.post('https://api.scarfly.ir/orders/create/', JSON.stringify(input), { headers: { 'content-type': 'application/json' }})
+    const data = response.json()
+    return data
+}
+
 
