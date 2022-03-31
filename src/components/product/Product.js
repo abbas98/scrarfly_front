@@ -8,7 +8,6 @@ import {  verify } from "../API/DefaultAPI"
 
 const getData = async (productID) => {
     const response = await fetch(`https://api.scarfly.ir/products/${productID}/`)
-    
     return response
 }
 

@@ -27,7 +27,10 @@ const CartInfo = ({ loginState, productID }) => {
             "postal_code": postallCodeRef.current.value,
         }
         
-        createOrder(order)
+        createOrder(order).then(res => {
+            window.location.href = `https://www.zarinpal.com/pg/StartPay/${res.data.authority}`
+        })
+        
     }
 
 

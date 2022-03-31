@@ -40,9 +40,13 @@ export async function login(input) {
     }
 }
 
-// const register = async () => {
-    
-// }
+export const register = async (input) => {
+    let response = await axios.post('https://api.scarfly.ir/accounts/login/', JSON.stringify({ "phone_number": input.toString() }), { headers: { 'content-type': 'application/json' } })
+    setTokens(response.data.access, response.data.refresh)
+    if (response.status === 200) {
+        return response
+    }
+}
 
 
 const setTokens = (access, refresh) => {
@@ -62,11 +66,8 @@ export const verify = async () => {
 }
 
 export const createOrder = async (input) => {
-    console.log(JSON.stringify(input));
-    const response = await axios.post('https://api.scarfly.ir/orders/create/', JSON.stringify(input), { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access') } })
-    const data = response.json()
-    console.log(data)
-    return data
+    const response = await axios.post('https://api.scarfly.ir/orders/create/', input, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access') } })
+    return response
 }
 
 

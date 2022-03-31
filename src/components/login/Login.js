@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { login} from "../API/DefaultAPI"
+import { login , register} from "../API/DefaultAPI"
 import toast from 'react-hot-toast';
 
 
@@ -28,7 +28,7 @@ const Login = ({ setLogin }) => {
         }else{
 
             const loading = toast.loading('')
-            login(newPhoneNumber).then(() => {
+            register(newPhoneNumber).then(() => {
                 setLogin(true)
                 toast.dismiss(loading)
                 toast.success('با موفقیت وارد شدید')
