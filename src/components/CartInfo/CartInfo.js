@@ -20,13 +20,13 @@ const CartInfo = ({ loginState, productID }) => {
     const payFunc = () => {
 
         
-
+        
         const order = {
-            'product_id': productID,
-            'address': addressRef.current.value,
-            'postal_code': postallCodeRef.value,
+            "product": productID,
+            "address": addressRef.current.value,
+            "postal_code": postallCodeRef.current.value,
         }
-
+        
         createOrder(order)
     }
 

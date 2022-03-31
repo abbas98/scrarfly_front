@@ -25,7 +25,6 @@ export async function Refresh() {
             { headers: { 'content-type': 'application/json' } })
 
 
-        console.log('Token Refreshed');
 
         setTokens(response.data.access)
         return
@@ -35,12 +34,15 @@ export async function Refresh() {
 
 export async function login(input) {
     let response = await axios.post('https://api.scarfly.ir/accounts/login/', JSON.stringify({ "phone_number": input.toString() }), { headers: { 'content-type': 'application/json' } })
-    console.log('Login', response);
     setTokens(response.data.access, response.data.refresh)
     if (response.status === 200) {
         return response
     }
 }
+
+// const register = async () => {
+    
+// }
 
 
 const setTokens = (access, refresh) => {
@@ -60,8 +62,10 @@ export const verify = async () => {
 }
 
 export const createOrder = async (input) => {
+    console.log(JSON.stringify(input));
     const response = await axios.post('https://api.scarfly.ir/orders/create/', JSON.stringify(input), { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access') } })
     const data = response.json()
+    console.log(data)
     return data
 }
 
